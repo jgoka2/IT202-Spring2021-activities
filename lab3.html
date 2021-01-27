@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+
+
+
+    <meta charset="utf-8">
+
+  </head>
+  <body>
+    <div id = "id1"></div>
+    <div id = "id2">
+
+    </div>
+     <script>
+        fetch ("https://api.nasa.gov/planetary/apod?api_key=YR9WiedYV07U3tJnVdcO0OnV1L5d7oFHsSjzF3c4")
+        .then ((response)=> {
+          return response.json()
+        })
+        .then ((json)=> {  
+
+          let h1 = document.createElement("h1")
+          h1.innerText = "The Vertical Magnetic Field of NGC 5775"
+
+          document.querySelector("#id1").appendChild(h1)
+          let img = document.createElement("img")
+
+          img.setAttribute("src", "https://apod.nasa.gov/apod/image/2101/NGC5775_NraoEnglish_6067.jpg")
+          document.querySelector("#id1").appendChild(img)
+
+          let p = document.createElement("p")
+
+          p.innerText = "How far do magnetic fields extend up and out of spiral galaxies?  For decades astronomers knew only that some spiral galaxies had magnetic fields.  However, after NRAO's Very Large Array (VLA) radio telescope (popularized in the movie Contact) was upgraded in 2011, it was unexpectedly discovered that these fields could extend vertically away from the disk by several thousand light-years.  The featured image of edge-on spiral galaxy NGC 5775, observed in the CHANG-ES (Continuum Halos in Nearby Galaxies) survey, also reveals spurs of magnetic field lines that may be common in spirals.  Analogous to iron filings around a bar magnet, radiation from electrons trace galactic magnetic field lines by spiraling around these lines at almost the speed of light.  The filaments in this image are constructed from those tracks in VLA data.  The visible light image, constructed from Hubble Space Telescope data, shows pink gaseous regions where stars are born.  It seems that winds from these regions help form the magnificently extended galactic magnetic fields."
+          document.querySelector("#id2").appendChild(p)
+        })
+    </script>
+  </body>
+</html>
