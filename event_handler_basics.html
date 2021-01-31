@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Event Handler Basics</title>
-   
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
@@ -28,6 +27,9 @@
     </blockquote>
 
     <script>      
+      function clicker() {
+        window.open(this.getAttribute("cite"));
+      }
 
       function mouseOver() {
         this.classList.add("bigger");
@@ -46,7 +48,9 @@
       for (let e of elements2) {
         e.addEventListener("mouseout", mouseOut);
       }
-       
+
+      document.querySelector("blockquote").addEventListener("click", clicker);
+
     </script>
   </body>
 </html>
