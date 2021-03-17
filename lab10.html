@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Speech Synthesis</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <style>
+      body{
+        margin: 200px;
+        background-color: crimson;
+      }
+      </style>
+    
+  </head>
+  
+  <body>
+     <h2>Welcom user</h2>
+
+    <form id="data">
+      <label for="txt">Enter a  Text:</label>
+      <textarea form="data" id="txt" name="txt" rows="3" cols="30"></textarea>
+      <br>
+      <label for="txt">Choose a language from list:</label><br>
+      <select name="lingo" id="lingo">
+        <option></option>
+      </select>
+      <br><br>
+       <button id="Speak" type="submit" disabled>Speak</button> 
+     
+    </form>
+
+    <script>
+      let synth = window.speechSynthesis;
+      let inputForm = document.querySelector('#data');
+      let inputTxt = document.querySelector('#txt');
+      let voiceSelect = document.querySelector('select');
+      let lingo = document.querySelector('#lingo');
+      let voices = [];
+      let populateVoiceList = () => {
+        voices = synth.getVoices();
+        for (let i = 0; i < voices.length ; i++) {
+          let option = document.createElement('option');
+          option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+          if (voices[i].default) {
+            option.textContent += ' -- DEFAULT';
+          }
+          option.value = i;
+          voiceSelect.appendChild(option);
+        }
+      }
+      populateVoiceList();
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = populateVoiceList;
+      }
+
+      lingo.addEventListener('change', (event) => {
+        if (lingo.value != "") {
+            ss.disabled = false;
+        } else if (lingo.value == ""){
+          ss.disabled = true;
+        }
+
+        
+      });
+      let ss = document.querySelector('#Speak');
+      ss.addEventListener('click', (event) => {
+        event.preventDefault();
+        let rep = new SpeechSynthesisUtterance(inputTxt.value);
+        rep.voice = voices[lingo.value];
+        synth.speak(rep);
+        inputTxt.blur();
+      });
+
+    </script>
+  </body>
+</html>
